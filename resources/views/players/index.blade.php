@@ -4,6 +4,7 @@
 
 @section('content')
     <h1>ELENCO PLAYERS</h1>
+    <h3><a href="{{ route('players.create') }}">AGGIUNGI UN GIOCATORE</a></h3>
 
     <table class="table">
         <thead>

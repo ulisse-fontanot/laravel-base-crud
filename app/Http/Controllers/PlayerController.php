@@ -30,7 +30,7 @@ class PlayerController extends Controller
      */
     public function create()
     {
-        //
+        return view('players.create');
     }
 
     /**
@@ -41,7 +41,15 @@ class PlayerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $playerNew = new Player();
+
+        $playerNew->fill($data);
+
+        $playerNew->save();
+
+        return redirect()->route('players.index');
     }
 
     /**
