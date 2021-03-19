@@ -13,25 +13,25 @@
     </div>
     @endif
 
-    <form action="{{ route('players.store') }}" method="post">
+    <form action="{{ route('players.update', ['player' => $player->id]) }}" method="post">
         @csrf
-        @method('POST')
+        @method('PUT')
         <div class="form-group">
             <label for="campo">NOME</label>
-            <input type="text" class="form-control" id="campo" name="nome">
+            <input name="nome" value="{{ $player->nome }}" type="text" class="form-control" id="campo">
         </div>
         <div class="form-group">
             <label for="campo">COGNOME</label>
-            <input type="text" class="form-control" id="campo" name="cognome">
+            <input name="cognome" value="{{ $player->cognome }}" type="text" class="form-control" id="campo">
         </div>
         <div class="form-group">
             <label for="campo">NAZIONALITA'</label>
-            <input type="text" class="form-control" id="campo" name="nazione">
+            <input name="nazione" value="{{ $player->nazione }}" type="text" class="form-control" id="campo">
         </div>
         <div class="form-group">
             <label for="campo">RUOLO</label>
-            <input type="text" class="form-control" id="campo" name="ruolo">
+            <input name="ruolo" value="{{ $player->ruolo }}" type="text" class="form-control" id="campo">
         </div>
-        <button type="submit" class="btn btn-primary">CREA</button>
+        <button type="submit" class="btn btn-primary">MODIFICA</button>
     </form>
 @endsection

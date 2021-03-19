@@ -43,6 +43,13 @@ class PlayerController extends Controller
     {
         $data = $request->all();
 
+        $request->validate([
+            'nome' => 'required|unique:players|max:255',
+            'cognome' => 'required|unique:players|max:255',
+            'nazione' => 'required|unique:players|max:255',
+            'ruolo' => 'required|unique:players|max:255'
+        ]);
+
         $playerNew = new Player();
 
         $playerNew->fill($data);
@@ -58,13 +65,11 @@ class PlayerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Player $player)
     {
-        $player_sel = Player::find($id);
-        
-        if ($player_sel) {
+        if ($player) {
             $data = [
-                'player' => $player_sel
+                'player' => $player
             ];
             return view('players.show', $data);
         }
@@ -78,9 +83,16 @@ class PlayerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Player $player)
     {
-        //
+        if ($player) {
+            $data = [
+                'player' => $player
+            ];
+            return view('players.edit', $data);
+        }
+
+        abort('404');
     }
 
     /**
@@ -90,9 +102,12 @@ class PlayerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Player $player)
     {
-        //
+        $data = $request->all();
+        $player->update($data);
+
+        return redirect()->route('players.show', $player);
     }
 
     /**
@@ -101,8 +116,10 @@ class PlayerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Player $player)
     {
-        //
+        $player->delete();
+
+        return redirect()->route('players.index');
     }
 }

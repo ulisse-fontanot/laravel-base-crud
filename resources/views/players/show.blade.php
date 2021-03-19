@@ -22,6 +22,14 @@
                 <td> {{ $player->cognome }} </td>
                 <td> {{ $player->nazione }} </td>
                 <td> {{ $player->ruolo }} </td>
+                <td><a href="{{ route('players.edit', ['player' => $player->id]) }}">modifica</a></td>
+                <td>
+                    <form action="{{ route('players.destroy', $player->id) }}" method="post" class="d-inline-block">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button" class="btn btn-danger">ELIMINA</button>
+                    </form>
+                </td>
             </tr>
         </tbody>
     </table>

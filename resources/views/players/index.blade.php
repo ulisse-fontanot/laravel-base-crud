@@ -10,6 +10,7 @@
         <thead>
             <tr>
             <th scope="col">#</th>
+            <th scope="col">NOME</th>
             <th scope="col">COGNOME</th>
             </tr>
         </thead>
@@ -17,6 +18,7 @@
             @foreach($players as $player)
                 <tr>
                     <th scope="row"> {{ $player->id }} </th>
+                    <td> {{ $player->nome }} </td>
                     <td> {{ $player->cognome }} </td>
                     <td><a href="{{ route('players.show', ['player' => $player->id]) }}">dettagli</a></td>
                 </tr>
