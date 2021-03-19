@@ -46,8 +46,8 @@ class PlayerController extends Controller
         $request->validate([
             'nome' => 'required|unique:players|max:255',
             'cognome' => 'required|unique:players|max:255',
-            'nazione' => 'required|unique:players|max:255',
-            'ruolo' => 'required|unique:players|max:255'
+            'nazione' => 'required|max:255',
+            'ruolo' => 'required|max:255'
         ]);
 
         $playerNew = new Player();
@@ -119,7 +119,6 @@ class PlayerController extends Controller
     public function destroy(Player $player)
     {
         $player->delete();
-
         return redirect()->route('players.index');
     }
 }
